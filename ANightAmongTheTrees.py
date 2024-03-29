@@ -1,13 +1,13 @@
 ########################################################
 #Imports, music initialization and inventory initialization
 
-import sys
-import os
+#import sys
+#import os
 
-new_directory = "C:\\Users\\kcoe2\\OneDrive\\Desktop\\Games\\A Night Among the Trees"
-pygame_path = "C:\\users\\kcoe2\\appdata\\local\\programs\\python\\python39\\lib\\site-packages"
-os.chdir(new_directory)
-sys.path.append(pygame_path)
+#new_directory = "C:\\Users\\kcoe2\\OneDrive\\Desktop\\Games\\A Night Among the Trees"
+#pygame_path = "C:\\users\\kcoe2\\appdata\\local\\programs\\python\\python39\\lib\\site-packages"
+#os.chdir(new_directory)
+#sys.path.append(pygame_path)
 
 import cv2
 import pygame
@@ -37,6 +37,8 @@ global scienceChecker
 scienceChecker = 0
 
 import hintsSystem
+
+import cred
 
 #Imports, music initialization and inventory initialization
 ########################################################
@@ -6748,7 +6750,7 @@ def Margaret2():
     print("\n")
     print("-------------------------------------------")
     time.sleep(2)
-    print("\nAs you approach the gift shop, Margaret comes out to meet you carrying an axe.")
+    print("\nAs you approach the gift shop, Margaret comes out to meet you carrying an axe.\n\n")
     time.sleep(2)
     print("        //\\\\//\\\\   ")
     print("       // //\\///\\    ")
@@ -6763,7 +6765,7 @@ def Margaret2():
     time.sleep(3)
     print('\n"Did you find anything to destory that monster?"')
     time.sleep(3)
-    if plasma.size() != 0:
+    if len(plasma) != 0:
         print("\nYou show Margaret the plasma gun you found.")
         time.sleep(3)
         print('\n"I sure hope that thing works. Only one way to find out."')
@@ -6784,7 +6786,7 @@ def Margaret2():
     time.sleep(3)
     print('"That will lure it to us."')
     time.sleep(3)
-    if plasma.size() != 0:
+    if len(plasma) != 0:
         print('"Once it appears you'+"'"+'ll run up and spray the plasma on it."')
         time.sleep(3)
         print('"Assuming that stuff works, it'+"'"+'ll be down in no time."')
@@ -6834,12 +6836,14 @@ def ready():
     time.sleep(3)
     print('"It shouldn'+"'"+'t be long..."')
     time.sleep(3)
-    #maybe add axe sounds
+    pygame.mixer.music.load("chopping-a-tree-with-hatchet-in-a-forest-far-away-54150.mp3")
+    pygame.mixer.music.play(-1)
     print("\nMargaret heads over to a large, healthy tree and swings at it with her axe.")
     time.sleep(3)
     print("\nThe clouds intensify overhead, growing darker with each swing of Margaret's axe.")
     time.sleep(3)
-    #thunder sound
+    pygame.mixer.music.load("natural-thunder-113219.mp3")
+    pygame.mixer.music.play(-1)
     time.sleep(3)
     print("\nThe sky is dark.")
     time.sleep(3)
@@ -6847,9 +6851,8 @@ def ready():
     time.sleep(3)
     print("The rain is pouring.")
     time.sleep(3)
-    #intense rain fight music (instead of Predator And Prey)
     pygame.mixer.music.load("2022-10-28_-_Predator_And_Prey_-_www.FesliyanStudios.com.mp3")
-    pygame.mixer.music.set_volume(0.6)
+    pygame.mixer.music.set_volume(1)
     pygame.mixer.music.play()
     print("\nA towering figure comes into view behind the trees.\n")
     time.sleep(3)
@@ -6881,10 +6884,10 @@ def ready():
     print("\nIt can only described as a giant, moving tree.")
     time.sleep(3)
     print("Margaret yells at you.")
-    time.sleep(3)
+    time.sleep(4)
     print('\n"THIS IS IT!"')
     time.sleep(3)
-    if plasma.size() != 0:
+    if len(plasma) != 0:
         plasmaFight()
     else:
         forgoneFight()
@@ -6904,7 +6907,7 @@ def plasmaFight():
     print('\n"There'+"'"+'s no time! We need to go!"')
     time.sleep(3)
     print("\nMargaret run to you and grabs your hand, pulling you away from the tree.")
-    time.sleep(3)
+    time.sleep(2)
     print("\n\n\n\n\n\n")
     print("      |||||||||||||     ||||   ||||  |||     |||")
     print("      ||||     |||||    ||||   ||||  ||||    |||")
@@ -6921,7 +6924,7 @@ def finalRun():
     print("\nThe tree is chasing you with furious speed.")
     print("You'll have to make decisions very quickly.")
     time.sleep(5)
-    #final run
+    monMarg1()
 
 def forgoneFight():
     print("\nThe tree is lumbering towards Margaret.")
@@ -6935,8 +6938,352 @@ def forgoneFight():
     print("The blade of the axe lands straight down on your neck, instantly killing you.")
     time.sleep(2)
     gameOver(19)
-    
 
+def monMarg1():
+    print("\nYou look ahead and see you and Margaret are running straight at a tree.")
+    print("Do you veer left or right?")
+    print("1. Left.")
+    print("2. Right.")
+    timer = 4
+    try:
+        user_input = inputimeout(prompt="I veer... ", timeout=timer)
+    except TimeoutOccurred:
+        print("\nYou take too long deciding and slam straight into the tree with Margaret.")
+        time.sleep(3)
+        print("\nThe moving tree catches up and stomps down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+    if user_input == "1":
+        print("\nYou veer left.")
+        time.sleep(3)
+        print("\nBut the moving tree naturally leans left and gains on you and Margaret.")
+        time.sleep(2)
+        print("\nThe moving tree slams it body down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+    elif user_input == "2":
+        print("\nYou veer right.")
+        time.sleep(3)
+        print("\nThe moving tree naturally leans left and slows down to turn right.")
+        time.sleep(3)
+        print("\nYou and Margaret gain some ground, but it's hot on your trail.")
+        time.sleep(3)
+        monMarg2()
+    else:
+        print("\nYou and Margaret slam straight into the tree.")
+        time.sleep(3)
+        print("\nThe moving tree catches up and stomps down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+
+def monMarg2():
+    print("\nThe plasma gun is still warming up...")
+    print("\nYou and Margaret keep running as fast as you can.\n")
+    time.sleep(2)
+    print("     /\\            /\\            /\\")
+    print("    /  \\          /  \\          /  \\")
+    print("   --  --        --  --        --  --")
+    print("   /    \\        /    \\        /    \\")
+    print("  /      \\      /      \\      /      \\")
+    print("  --    --      --    --      --    --")
+    print("  /      \\      /      \\      /      \\")
+    print(" /        \\    /        \\    /        \\")
+    print(" ----------    ----------    ----------")
+    print("    |  |          |  |          |  |")
+    print("    |  |          |  |          |  |")
+    print("    |  | ^^     ^^|  |   ^^     |  |")
+    print("    |  | **     **|  |   **     |  |")
+    print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+    time.sleep(2)
+    print("\nYou see that you're heading straight towards some wolves!")
+    time.sleep(3)
+    print("\nDo you run towards the wolves or find another path?")
+    print("1. Run towards the wolves.")
+    print("2. Find another path.")
+    try:
+        user_input = inputimeout(prompt="I would like to... ", timeout=5)
+    except TimeoutOccurred:
+        print("\nYou take too long deciding and the moving tree catches up to you and Margaret.")
+        time.sleep(3)
+        print("\nIt raises its foot and stomps on you, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+    if user_input == "1":
+        print("\nYou run straight at the wolves.")
+        time.sleep(3)
+        print("As you run towards them they see the moving tree right behind you.\n")
+        time.sleep(3)
+        print("       /\\    /\\         /\\    /\\         /\\    /\\")
+        print("      /  \\__/  \\       /  \\__/  \\       /  \\__/  \\")
+        print("     {          }     {          }     {          } ")
+        print("    {    O  O    }   {    O  O    }   {    O  O    }  ")
+        print("    {            }   {            }   {            } ")
+        print("     {     v    }     {     v    }     {     v    }  ")
+        print("      {________}       {________}       {________}   ")
+        time.sleep(2)
+        print("\nTheir eyes grow wide with fear and run away!")
+        time.sleep(3)
+        print("\nAnd you and Margaret keep running without slowing down to turn directions.")
+        time.sleep(3)
+        monMarg3()
+    elif user_input == "2":
+        print("\nYou look around for a different way to run to avoid the wolves.")
+        time.sleep(3)
+        print("\nThe only feasible path is awfully muddy, yet you yank Margaret and still run down it.")
+        time.sleep(3)
+        print("\nAs you run you hit an exceptionally slippery mud puddle and you both fall face first.")
+        time.sleep(3)
+        print("\nBefore either of you can get up the moving tree is upon you.")
+        print("It slams its body down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+    else:
+        print("\nYou and Margaret take too long to decide and accidentally slam into a tree.")
+        time.sleep(3)
+        print("\nThe moving tree catches up and stomps down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+
+def monMarg3():
+    print("\nThe moving tree starts gaining on you both...")
+    time.sleep(3)
+    print("And the plasma gun is still warming up. It's a little over half way.")
+    time.sleep(3)
+    print("\nEach stomp shakes the ground, making it hard to run.")
+    time.sleep(3)
+    print('\n"Woof woof woof!"\n')
+    time.sleep(2)
+    print("       /\\    /\\      ")
+    print("      /  \\__/  \\      ")
+    print("     {   ^  ^   }    ")
+    print("    {    0  0    }    ")
+    print("    {    _____   }   ")
+    print("     {   \\   /  }      ")
+    print("      {___| |__}        ")
+    print("          |_|          ")
+    print("                      ")
+    time.sleep(2)
+    print("\nThe dog you met jumps out from behind the trees!")
+    time.sleep(3)
+    print('\n"Grrrrrr ruff ruff!"')
+    time.sleep(3)
+    print("\nThe dog barks loudly, distracting it momentarily.")
+    print("Allowing you and Margaret to gain some much needed ground.")
+    time.sleep(5)
+    print("\nYou turn back and see the moving tree kick the dog with its huge trunk of a foot.")
+    print("The dog is sent flying, hitting a tree and falling to the ground, not moving.")
+    time.sleep(6)
+    print("\nYou and Margaret keep running. But the tree is back to chasing you.")
+    time.sleep(3)
+    monMarg4()
+
+def monMarg4():
+    print("\nYou look ahead and see a steep cliffside stretching out in front of you and Margaret.")
+    time.sleep(3)
+    print("It's about 11 feet high.")
+    time.sleep(3)
+    print("\nWhat do you do??")
+    print("1. Try to climb the cliff.")
+    print("2. Use your grapping hook to climb the cliff.")
+    try:
+        user_input = inputimeout(prompt="I would like to... ", timeout=5)
+    except TimeoutOccurred:
+        print("\nYou take too long deciding and the moving tree catches up to you and Margaret.")
+        time.sleep(3)
+        print("\nIt raises its foot and stomps down, instantly killing both of you.")
+        time.sleep(3)
+        gameOver(13)
+    if user_input == "1":
+        print("\nYou try to find a rock, or a branch, or anything to climb it.")
+        print("But it's to no avail.")
+        time.sleep(3)
+        print("\nThe moving tree catches up to and stomps on you, killing both of you instatnly.")
+        time.sleep(3)
+        gameOver(13)
+    elif user_input == "2":
+        print("\nYou whip out your grappling hook and swing it up.")
+        time.sleep(3)
+        print("It catches on a rock! You quickly climb up with Margaret.")
+        time.sleep(3)
+        print("\nYou take a monment to climb up but you make it before the moving tree can get you.")
+        time.sleep(3)
+        print("You turn back and face the giant tree which is still below the cliff.\n")
+        time.sleep(3)
+        print(" / // //  /  \\/ / / /  / //   / //   /// /")
+        print("//  /  / / / /\\  /\\/  / / /  //  /  // / ")
+        print(" /  / /  //  / \\__//__ \\/ / /  / / / /  /")
+        print(" // / /  /\\  // // ~/ }/ // / / / /  / / /")
+        print(" / /\\/ / / / { / \\ /  / /  / /  // //  / ")
+        print(" / / \\ // / /{/  ~\\/ {/  /  / / / / / // ")
+        print(" /  / \\/ // /|~//  ///\\ /// / // / //  / ")
+        print("/ / /\\/ / // {/ \\/~ \\/| // / \\/\\\\ / //  /") 
+        print("/ \\/ //  /_/}/ \\\\/ // /} /\\ / \\_\\ \\// /")
+        print(" / \\|/ /  /\\/ /\\ /~ / | //  / /\\/ / / /")
+        print("// /|/ /  // /\\| / ~\\/}/ / /   /\\/_ / //")
+        print(" / /\\/ / // /|/~ / \\ ~|__\\ /  // / // / ")
+        print("// / \\ / /  /{  o  ~/ |/ / // \\/  / / ///")
+        print(" /  / \\/ ^/^^/^/|\\^^^//^/^^/ // /  / / / ")
+        print("/ / ^//^^ // / / \\ / ^/^ / /^^//^/^ / / //")
+        print("/^^/^ / / //^^  / /  //  ^^ / / ^/^^/^ // /")
+        time.sleep(2)
+        if "camera" in inventory and "film" in inventory:
+            print("\nYou take this moment to snap a photo with your camera of the giant, moving tree.")
+            print("\nBut only one. It starts climbing the cliff.")
+            inventory.append("photo")
+            time.sleep(3)
+        kill()
+    else:
+        print("\nYou take too long deciding and the moving tree catches up to you.")
+        time.sleep(3)
+        print("\nIt raises its foot and stomps on you, instantly killing you.")
+        time.sleep(3)
+        gameOver(13)
+
+def kill():
+    print("\nYou check the plasma gun.")
+    time.sleep(3)
+    print("\nLit up by LED's it reads, 'FULLY CHARGED'.")
+    time.sleep(3)
+    print('\n"Now! Use it!!!"')
+    time.sleep(3)
+    print("\nYou aim the plasma gun right at the moving tree towering before you.")
+    time.sleep(3)
+    if "good" in plasma:
+        print("\nYou pull the trigger.")
+        time.sleep(3)
+        print("\nThe trees rears back and falls to the ground the moment the plasma makes contact with it.")
+        time.sleep(3)
+        print("\nYou stand at the edge of the cliff, sending a steady stream of blue-hot at the tree.")
+        time.sleep(3)
+        print("\nThe tree reels in pain, trying to crawl away from its demise.")
+        time.sleep(3)
+        print("\nYou keep the trigger firmly pressed down.")
+        time.sleep(3)
+        print("\nThe tree creaks and writhers in obvious pain, it's wood disintegrating by the second.")
+        time.sleep(3)
+        print('"Keep going! It'+"'"+'s nearly dead!"')
+        time.sleep(3)
+        print("\nThe moving tree grabs onto the nearest forest tree, almost hugging it.")
+        time.sleep(3)
+        finalChoice()
+    else:
+        print("\nYou pull the trigger.")
+        time.sleep(3)
+        print("\nNo matter how much you spray, it has no effect.")
+        time.sleep(3)
+        print('n\"It'+"'"+'s no use! We have to go!"')
+        time.sleep(3)
+        print("\nHowever, you and Margaret stalled too long.")
+        print("The tree is already nearly over the cliff.")
+        time.sleep(3)
+        print("\nAnd with one motion, it pulls itself up and slams down on you and Margaret.")
+        time.sleep(3)
+        gameOver(13)
+
+def finalChoice():
+    pygame.mixer.music.fadeout(3000)
+    time.sleep(3)
+    pygame.mixer.music.load("light-rain-ambient-114354.mp3")
+    pygame.mixer.music.play(-1)
+    print("\nThe tree writhers with each new section of bark you introduce to the plasma.")
+    time.sleep(3)
+    print("\nDo you keep going?")
+    print("1.Yes.")
+    print("2. No.")
+    i = input("...")
+    if i == "1":
+        print("\nYou continue the stream of plasma.")
+        time.sleep(3)
+        print("\nYou successfully disintegrate its trunks acting as arms and legs.")
+        time.sleep(3)
+        print("\nIt has stopped moving.")
+        time.sleep(3)
+        print("\nYou scale down the cliff using the rope from your grappling hook.")
+        time.sleep(3)
+        print("\nYou launch plasma onto what remains of the moving tree until it is no more.")
+        time.sleep(6)
+        print("\nYou scale back up the cliff.")
+        time.sleep(3)
+        forNow()
+    if i == "2":
+        print("\nYou stop spraying it with plasma.")
+        time.sleep(3)
+        print("\nAll that remains is half of its main trunk and one of its 'arms'.")
+        time.sleep(3)
+        print("It clings to the forest tree and stops moving.")
+        time.sleep(3)
+        print('\n"Why did you stop?? We are nearly there!"')
+        time.sleep(3)
+        print("\nYou look up at Margaret.")
+        time.sleep(6)
+        print('\n"Ok. I understand. Let'+"'"+'s go."')
+        time.sleep(3)
+        forNow()
+    else:
+        print("\nIt writhers in pain.")
+
+def forNow():
+    print("\nExhausted, you and Margaret return to the bus stop.")
+    time.sleep(3)
+    pygame.mixer.music.load("costalDrive.mp3")
+    pygame.mixer.music.play(-1)
+    time.sleep(6)
+    print("\nYou see the sun coming up.")
+    time.sleep(3)
+    print("You take in the sunlight, feeling the cold air of the night drift away.")
+    time.sleep(3)
+    print('\n"Woof!"\n')
+    time.sleep(2)
+    print("       /\\    /\\      ")
+    print("      /  \\__/  \\      ")
+    print("     {   ^  ^   }    ")
+    print("    {    0  0    }    ")
+    print("    {    _____   }   ")
+    print("     {   \\   /  }      ")
+    print("      {___| |__}        ")
+    print("          |_|          ")
+    print("                      ")
+    time.sleep(2)
+    print("\nThe dog you met comes out of the woods!")
+    time.sleep(3)
+    print("You kneel down and embrace the dog. Margaret joins you.")
+    time.sleep(3)
+    print("It's limping its right hind leg, but it still licks you and Margaret all over your face.")
+    print("Gross!")
+    time.sleep(3)
+    print('"Woof! Woof woof woof!"')
+    time.sleep(5)
+    print("\n\n\nThe bus never did come, but you and Margaret hike through the hills to the other side of the tunnel.")
+    print("A kind driver soon picked you up and you, Margaret, and the dog all headed to your home.")
+    print("You soon arrived home with your new, playful companion and Margaret. You have reach your home safe and sound.")
+    print("You sent in your letter of resignation to the factory the following day.")
+    if "photo" in inventory:
+        print("\nNo one would have believed your story if you didn't have photographic proof.")
+        print("Except Margaret, of course.")
+        print("You only managed to show a few friends before the camera went missing one day.")
+        print("You hadn't made copies yet, and you still wonder where it went. You are sure you didn't misplace it.")
+    else:
+        print("\nNo one believed your story, except Margaret. But that didn't matter, you were alive and that's what counted.")
+    if "huge diamond" in inventory:
+        print("\nYou sold the huge diamond you found in that cave and recieved more money than you ever thought possible.")
+        print("You now live your life in luxury. A nice tradeoff for that harrowing night at least.")
+    else:
+        print("\nYou found a new job working as a telemarketer. It's not great, but at least it pays the bills.")
+    print("\nYou never came across the Midnight Bus again.")
+    print("Probably for the best. Guess that means you aren't 'truly abandoned'.")
+    print("Overall, an interesting night to be sure.")
+    print("Best of all, you have made two new lifelong friends.")
+    print("However, Margaret left the very next day.")
+    print("Before she left, she told you, "+'"There'+"'"+'s more paranormal research to be done."')
+    print('"I'+"'"+'ll be heading to Oregon. If it'+"'"+'s meant to be, we'+"'"+'ll meet again."')
+    i = input("\n\n\nPress enter when you're done reading.")
+    finalEnding()
+
+def finalEnding():
+    cred.credits()
+    endOfEndings()
+    
+        
 #final section
 ########################################################
 
@@ -7092,7 +7439,21 @@ def joyfulEnding():
     global recallChecker
     recallChecker += 1
     deathTeardown()
-    
+
+def endOfEndings():
+    global endings
+    print("\n\n\nYOU SURVIVED THE NIGHT!!! Congraduations!\n")
+    time.sleep(2)
+    endings.append(20)
+    print("Thank you for playing this game.")
+    time.sleep(3)
+    print("\nHopefully you now understand what happened in the woods that night.")
+    time.sleep(3)
+    print("\nAgain, thank you.")
+    time.sleep(3)
+    print("\n\n\n\t\t\t\t\t\t\t\t\t\t~Kieran")
+    time.sleep(12)
+    main()
 
 def gameOver(ending):
     global endings
@@ -7159,7 +7520,7 @@ def gameOver(ending):
         print("Decapitation")
     else:
         pass
-    print("\nThere are X endings to reach in this game.") #X ENDINGS
+    print("\nThere are 20 endings to reach in this game.")
     print("Can you reach them all?")
     time.sleep(5)
     deathTeardown()
@@ -7230,6 +7591,8 @@ def hintOffer():
         hint(18)
     elif user_input == "19":
         hint(19)
+    elif user_input == "20":
+        hint(20)
     else:
         print("\nThe trees yearn for your next visit...")
         time.sleep(6)
@@ -7252,7 +7615,7 @@ def recallMessage():
     time.sleep(3)
     print("\nYou'll now start the game with all items you had before you died!")
     time.sleep(6)
-    print("\nI hope you keep going until you reach ending X.") #ENDING X
+    print("\nI hope you keep going until you reach ending 20.")
     print("There is more to accomplish in this game than just escaping!")
     time.sleep(6)
     recallChecker += 1
@@ -7326,6 +7689,8 @@ def hint(ending):
     elif ending == 19:
         print("\nHere is your hint:")
         print("Don't head into a fight unprepared!")
+    elif ending == 20:
+        print("\nNo hint for this one! Just keep going.")
     print("\nGood luck...")
     time.sleep(5)
     if recallChecker == 1:
@@ -7345,7 +7710,6 @@ def main():
     setupGameMusic()
     printTitle()
     startGame()
-    backToMargaret()
     startingArea()
     
 main()
